@@ -69,6 +69,7 @@
 
 
 <script>
+import axios from 'axios';
 // import axios from "axios";
 export default {
   name: "Login",
@@ -82,6 +83,18 @@ export default {
 
   methods: {
     async handleSubmit() {
+ const res = await axios.post("/api/v1/employee/login", {
+      
+        name: this.name,
+        password:this.password
+      }
+      
+      );console.log(res.data.length);
+      if(res.data.length==1)
+      {alert("Successful");}
+      else
+      {alert("Try again");}
+   
     //   console.log(this.id + this.password);
 
     //   const response = await axios.post("login.php", {

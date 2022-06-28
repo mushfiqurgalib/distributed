@@ -73,7 +73,7 @@
 
 <script>
 
-
+import axios from 'axios';
 export default {
   name: "Register",
 
@@ -90,7 +90,21 @@ export default {
   },
   methods:{
     async handleSubmit(){
-        this.$router.push("/");
+        // this.$router.push("/");
+         const res = await axios.post("/api/v1/employee/", {
+      
+        name: this.name,
+        password:this.password
+      }
+      
+      );console.log(res.data.data);
+
+      if(res.data.data.errno==1062){
+        console.log("YES");
+        alert("wrong");
+      }
+      else
+      {alert("Successfully registered");}
     }
   }
 
