@@ -9,26 +9,20 @@
       <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
         Add Status
       </router-link>
-    </button></div>
+    </button>
 
     <!-- <Profile v-bind:info="info"> </Profile> -->
 
-    <!-- <div class="container">
+    <div class="container">
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-        <div class="col" v-for="(inf, index) in info" :key="inf.sid">
+        <div class="col" v-for="(inf) in info" :key="inf.sid">
           <div class="card radius-15">
             <div class="card-body text-center">
               <div class="p-4 border radius-15">
-                <img
-                  :src="getImageURL(index)"
-                  width="110"
-                  height="110"
-                  class="rounded-circle shadow"
-                  alt=""
-                />
+               
 
-                <h5 class="mb-0 mt-5">Name: {{ inf.name }}</h5>
-                <p class="mb-3">Mobile: {{ inf.mobile }}</p>
+                <h5 class="mb-0 mt-5">Email: {{ inf.email }}</h5>
+                <p class="mb-3">Status: {{ inf.status }}</p>
                 <div class="list-inline contacts-social mt-3 mb-3">
                   <a
                     href="javascript:;"
@@ -48,19 +42,7 @@
                 </div>
                
 
-                <router-link :to="{ name: 'Profile', params: { inf } }">
-                  Visit Profile</router-link
-                >
-
-                <button
-                  @click="
-                    () => {
-                      deleteProfile(inf.id);
-                    }
-                  "
-                >
-                  Delete User
-                </button>
+                
 
                 
               </div>
@@ -69,7 +51,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -92,19 +74,9 @@ export default {
 
   methods: {
     fetchInfo() {
-      axios.get("/readall.php").then((response) => (this.info = response.data));
+      axios.get("/api/v1/employee/viewstatus",{email:localStorage.getItem("email"),}).then((res) => (this.info = res.data));
     },
     
-
-    deleteProfile(id) {
-      console.log("hello");
-      // return 'http://localhost/php_test/delete.php?id='+ this.inf.id ;
-      const response = axios.post("/delete.php?id=" + id);
-
-      if (response.data[0].status == 1) {
-        alert(" User Deleted!");
-      }
-    },
   },
 };
 </script>

@@ -15,6 +15,7 @@ router.post('/', employeeController.createnewuser);
 
 router.post('/status', employeeController.createnewstatus);
 
+router.get('/viewstatus', employeeController.getAllStatus);
 // update employee
 router.put('/:id', employeeController.updateEmployee);
 
