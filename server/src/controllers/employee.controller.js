@@ -46,8 +46,11 @@ exports.createnewuser = (req, res) =>{
 exports.getAllStatus = (req, res)=> {
     //console.log('here all employees list');
     const UserReqData=new StatusModel(req.body);
+    // console.log(req.body);
+    const email=req.params.email;
+    console.log(email);
     console.log('employeeReqData', UserReqData);
-    StatusModel.getAllStatus(UserReqData,(err, status) =>{
+    StatusModel.getAllStatus(email,(err, status) =>{
         console.log('We are here');
         if(err)
         res.send(err);

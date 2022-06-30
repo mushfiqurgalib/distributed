@@ -19,8 +19,8 @@ Status.createStatus=(employeeReqData,result)=>{
 }
 
 //get all employees
-Status.getAllStatus = (employeeReqData,result) =>{
-    dbConn.query('SELECT * FROM(SELECT * FROM `status` ORDER BY id DESC LIMIT 10)VAR1 WHERE email!=?',[employeeReqData.email], (err, res)=>{
+Status.getAllStatus = (email,result) =>{
+    dbConn.query('SELECT * FROM(SELECT * FROM `status` ORDER BY id DESC LIMIT 10)VAR1 WHERE email!=?',[email], (err, res)=>{
         if(err){
             console.log('Error while fetching employess', err);
             result(null,err);

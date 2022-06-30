@@ -15,7 +15,7 @@
 
     <div class="container">
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-        <div class="col" v-for="(inf) in info" :key="inf.sid">
+        <div class="col" v-for="inf in info" :key="inf.id">
           <div class="card radius-15">
             <div class="card-body text-center">
               <div class="p-4 border radius-15">
@@ -74,7 +74,9 @@ export default {
 
   methods: {
     fetchInfo() {
-      axios.get("/api/v1/employee/viewstatus",{email:localStorage.getItem("email"),}).then((res) => (this.info = res.data));
+      console.log(localStorage.getItem("email"));
+      axios.get("/api/v1/employee/viewstatus/"+localStorage.getItem("email")).then((res) => (this.info = res.data));
+
     },
     
   },
