@@ -1,12 +1,13 @@
 var dbConn  = require('../../config/db.config');
 
 var User = function(users){
-    this.name     =   users.name;
+    this.email     =   users.email;
 
     this.password          =   users.password;
 
  
 }
+
 
 // get all employees
 // Employee.getAllEmployees = (result) =>{
@@ -22,8 +23,8 @@ var User = function(users){
 // }
 
 // get employee by ID from DB
-User.getUserByname = (employeeReqData, result)=>{
-    dbConn.query('SELECT * FROM users WHERE name=? AND password=?', [employeeReqData.name,employeeReqData.password], (err, res)=>{
+User.getUserByemail = (employeeReqData, result)=>{
+    dbConn.query('SELECT * FROM users WHERE email=? AND password=?', [employeeReqData.email,employeeReqData.password], (err, res)=>{
         if(err){
             console.log('Error while fetching employee by name', err);
             result(null, err);
@@ -45,6 +46,8 @@ User.createUser = (employeeReqData, result) =>{
         }
     })
 }
+
+
 
 // // update employee
 // Employee.updateEmployee = (id, employeeReqData, result)=>{

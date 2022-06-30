@@ -1,5 +1,6 @@
 
 const UserModel = require('../models/employee.model');
+const StatusModel=require('../models/status.model');
 
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
@@ -14,10 +15,10 @@ exports.getEmployeeList = (req, res)=> {
 }
 
 // get employee by ID
-exports.getUserByname = (req, res)=>{
+exports.getUserByemail = (req, res)=>{
     //console.log('get emp by id');
     const UserReqData=new UserModel(req.body);
-    UserModel.getUserByname(UserReqData, (err, user)=>{
+    UserModel.getUserByemail(UserReqData, (err, user)=>{
         if(err)
         res.send(err);
         console.log('single employee data',user);
@@ -42,6 +43,22 @@ exports.createnewuser = (req, res) =>{
     }
 }
 
+//create new status
+exports.createnewstatus = (req, res) =>{
+    const UserReqData = new StatusModel(req.body);
+    console.log('employeeReqData', UserReqData);
+    // check null
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.send(400).send({success: false, message: 'Please fill all fields'});
+    }else{
+        StatusModel.createStatus(UserReqData, (err, user)=>{
+            if(err){
+            res.send(err);}
+            else{
+            res.json({status: true, message: 'Status Created Successfully',data:user})}
+        })
+    }
+}
 // update employee
 exports.updateEmployee = (req, res)=>{
     const employeeReqData = new EmployeeModel(req.body);

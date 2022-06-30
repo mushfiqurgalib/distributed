@@ -21,10 +21,10 @@
           >
             <input
               class="input100"
-              type="text"
-              name="name"
-              v-model="name"
-              placeholder="Name"
+              type="email"
+              name="email"
+              v-model="email"
+              placeholder="Email"
             />
             <span class="focus-input100"></span>
             <span class="symbol-input100">
@@ -80,7 +80,7 @@ export default {
   data() {
     return {
       
-      name: "",
+      email: "",
       password: "",
       errors: {
         status: "",
@@ -93,7 +93,7 @@ export default {
         // this.$router.push("/");
          const res = await axios.post("/api/v1/employee/", {
       
-        name: this.name,
+        email: this.email,
         password:this.password
       }
       
