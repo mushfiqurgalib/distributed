@@ -22,6 +22,7 @@ exports.getUserByemail = (req, res)=>{
         if(err)
         res.send(err);
         console.log('single employee data',user);
+      
         res.send(user);
     })
 }

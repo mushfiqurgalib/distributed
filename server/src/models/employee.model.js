@@ -1,5 +1,5 @@
 var dbConn  = require('../../config/db.config');
-
+const jwt=require('jsonwebtoken');
 var User = function(users){
     this.email     =   users.email;
 
@@ -29,7 +29,12 @@ User.getUserByemail = (employeeReqData, result)=>{
             console.log('Error while fetching employee by name', err);
             result(null, err);
         }else{
+            const username=employeeReqData.email;
+            const user={name:username};
+            const access=jwt.sign(user,process.env.JWT_KEY);
+            // result(null,res);
             result(null, res);
+           
         }
     })
 }
@@ -47,6 +52,12 @@ User.createUser = (employeeReqData, result) =>{
     })
 }
 
+// User.generateJwt = function() {
+  
+//     return jwt.sign (users.email,process.env.JWT_KEY);
+
+      
+// }
 
 
 // // update employee

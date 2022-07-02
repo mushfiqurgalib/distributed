@@ -59,7 +59,12 @@
 						</a>
 					</div> -->
           <br />
-     
+      <div class="text-center p-t-136">
+            <a class="txt2" href="/register">
+              <h5>Create your Account</h5>
+              <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+            </a>
+          </div>
         </form>
       </div>
     </div>
@@ -89,14 +94,15 @@ export default {
         password:this.password
       }
       
-      );console.log(res.data.length);
+      );console.log(res);
       if(res.data.length==1)
       {alert("Successful");
       localStorage.setItem("email",this.email);
       this.$router.push("/Status");
       }
-      else
-      {alert("Try again");}
+      else 
+      {alert("Failed");
+}
    
     //   console.log(this.id + this.password);
 

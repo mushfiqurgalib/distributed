@@ -5,7 +5,7 @@
     <h1>Status list</h1>
     <br />
     <br />
-    <button align="center">
+    <button >
       <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
         Add Status
       </router-link>
@@ -136,7 +136,7 @@ element.style {
   padding-top: 50px;
 }
 #button {
-  padding-left: 50px;
+  padding-left: 10px;
   font: bold;
 }
 </style>
