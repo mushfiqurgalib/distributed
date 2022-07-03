@@ -4,6 +4,7 @@ import Register from '../components/Register.vue'
 import Login from '../components/Login.vue'
 import Status from '../components/Status.vue'
 import AddStatus from '../components/CreateStatus.vue'
+import Addstory from '../components/CreateStory.vue'
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path:'/register',
    
     component:Register
+  },
+  {
+    path:'/addstory',
+   
+    component:Addstory
   },
 ]
 

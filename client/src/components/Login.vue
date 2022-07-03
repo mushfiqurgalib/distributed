@@ -93,10 +93,12 @@ export default {
         email: this.email,
         password:this.password
       }
-      
+    
       );console.log(res);
-      if(res.data.length==1)
+      
+      if(res.data)
       {alert("Successful");
+      localStorage.setItem("Jwt",res.data);
       localStorage.setItem("email",this.email);
       this.$router.push("/Status");
       }

@@ -25,19 +25,23 @@ var User = function(users){
 // get employee by ID from DB
 User.getUserByemail = (employeeReqData, result)=>{
     dbConn.query('SELECT * FROM users WHERE email=? AND password=?', [employeeReqData.email,employeeReqData.password], (err, res)=>{
+        console.log(res);
         if(err){
             console.log('Error while fetching employee by name', err);
-            result(null, err);
+             result(null, err);
         }else{
+            if(res.length==1){
             const username=employeeReqData.email;
             const user={name:username};
             const access=jwt.sign(user,process.env.JWT_KEY);
-            // result(null,res);
-            result(null, res);
+             result(null,access);}
+            // result(null, res);
            
         }
     })
 }
+
+
 
 // create new employee
 User.createUser = (employeeReqData, result) =>{

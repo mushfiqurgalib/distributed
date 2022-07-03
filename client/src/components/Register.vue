@@ -109,7 +109,9 @@ export default {
         alert("wrong");
       }
       else
-      {alert("Successfully registered");}
+      {alert("Successfully registered");
+      this.$router.push("/");
+      }
     }
   }
 

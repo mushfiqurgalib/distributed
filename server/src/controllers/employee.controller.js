@@ -1,6 +1,7 @@
 
 const UserModel = require('../models/employee.model');
 const StatusModel=require('../models/status.model');
+const jwt=require('jsonwebtoken');
 
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
@@ -26,7 +27,40 @@ exports.getUserByemail = (req, res)=>{
         res.send(user);
     })
 }
+exports.verifyJWT=(req,result)=>{
+    jwt.verify(req.params.jwt,process.env.JWT_KEY,
+        (error,decoded)=>{
+            if(error){
+                console.log("error");
+            }
+            else{
+                result.send(decoded);
+            }
+        })
 
+}
+// exports.verifyJwt = (req, res, next) => {
+//     var token=req.body.jwttoken;
+//     // if('authorization' in req.headers)
+//     //     token = req.headers['authorization'].split(' ')[1];
+
+//     if(!token)
+//         return res.status(403).send({auth: false, message: 'No token provided.'});
+
+//     else{
+//         jwt.verify(token, process.env.JWT_SECRET,
+//             (err, decoded) => {
+//                 if(err)
+//                     return res.status(500).send({ auth: false, message: 'Token authentication failed' });
+//                 else{
+//                     req._id = decoded._id;
+//                     next()
+//                 }
+//             }
+//         )
+//     }
+
+// }
 // create new employee
 exports.createnewuser = (req, res) =>{
     const UserReqData = new UserModel(req.body);

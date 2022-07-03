@@ -4,13 +4,19 @@
 
     <h1>Status list</h1>
     <br />
-    <br />
-    <button >
+    <br /><div style="display:inline-block;padding:5px">
+    <button class="btn1" >
       <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
         Add Status
       </router-link>
     </button>
-
+       <button class="btn1" >
+      <router-link to="/Addstory" class="nav-link fa-1x" id="button">
+       Add picture
+      </router-link>
+    </button>
+    <button @click="()=>{logout();}">Logout</button>
+</div>
     <!-- <Profile v-bind:info="info"> </Profile> -->
 
     <div class="container">
@@ -66,6 +72,7 @@ export default {
   data() {
     return {
       info: "",
+      email:""
     };
   },
   mounted() {
@@ -74,10 +81,17 @@ export default {
 
   methods: {
     fetchInfo() {
-      console.log(localStorage.getItem("email"));
-      axios.get("/api/v1/employee/viewstatus/"+localStorage.getItem("email")).then((res) => (this.info = res.data));
+      // console.log(localStorage.getItem("email"));
+      axios.get("api/v1/employee/profile/"+localStorage.getItem("Jwt")).then((res)=>{this.email=res.data.name;
+      console.log(res);
+      axios.get("/api/v1/employee/viewstatus/"+this.email).then((res) => (this.info = res.data));});
+      
 
     },
+    logout(){
+      localStorage.clear();
+      this.$router.push("/");
+    }
     
   },
 };
@@ -138,5 +152,15 @@ element.style {
 #button {
   padding-left: 10px;
   font: bold;
+}
+.buttondis{
+  width: 100%;
+  text-align:center;
+}
+.inner{
+  display: inline-block;
+}
+.btn1{
+  margin-right: 20px;
 }
 </style>
