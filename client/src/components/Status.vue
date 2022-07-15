@@ -120,8 +120,7 @@ body {
     0 2px 6px 0 rgba(19, 81, 114, 0.54);
 }
 
-element.style {
-}
+
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
 }

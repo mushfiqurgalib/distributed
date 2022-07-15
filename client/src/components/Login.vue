@@ -99,7 +99,7 @@ export default {
       if(res.data)
       {alert("Successful");
       localStorage.setItem("Jwt",res.data);
-      localStorage.setItem("email",this.email);
+     localStorage.setItem("email",this.email);
       this.$router.push("/Status");
       }
       else 
