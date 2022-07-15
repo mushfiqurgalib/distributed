@@ -16,6 +16,8 @@ router.post('/', employeeController.createnewuser);
 
 router.post('/status', employeeController.createnewstatus);
 
+router.post('/story', employeeController.createnewstory);
+
 router.get('/profile/:jwt',employeeController.verifyJWT);
 
 router.get('/viewstatus/:email', employeeController.getAllStatus);

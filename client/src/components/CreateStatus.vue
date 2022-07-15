@@ -16,6 +16,7 @@ class="login100-form validate-form">
 
 <script>
 import axios from 'axios';
+
 // import axios from "axios";
 export default {
   name: "CreateStatus",
@@ -32,6 +33,7 @@ export default {
  const res = await axios.post("/api/v1/employee/status", {
       
         status: this.status,
+        // email:axios.get("api/v1/employee/profile/"+localStorage.getItem("Jwt")).then((response)=>{response.data.name})
         email:localStorage.getItem("email")
       }
       

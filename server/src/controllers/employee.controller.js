@@ -1,7 +1,9 @@
 
 const UserModel = require('../models/employee.model');
 const StatusModel=require('../models/status.model');
+const StoryModel=require('../models/story.model');
 const jwt=require('jsonwebtoken');
+
 
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
@@ -107,6 +109,22 @@ exports.createnewstatus = (req, res) =>{
             res.send(err);}
             else{
             res.json({status: true, message: 'Status Created Successfully',data:user})}
+        })
+    }
+}
+
+exports.createnewstory = (req, res) =>{
+    const UserReqData = new StoryModel(req.body);
+    console.log('employeeReqData', UserReqData);
+    // check null
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.send(400).send({success: false, message: 'Please fill all fields'});
+    }else{
+       StoryModel.createStory(UserReqData, (err, user)=>{
+            if(err){
+            res.send(err);}
+            else{
+            res.json({status: true, message: 'Story Created Successfully',data:user})}
         })
     }
 }
