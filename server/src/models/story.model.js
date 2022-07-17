@@ -8,7 +8,7 @@ var Story=function(story){
 
 Story.createStory=(employeeReqData,result)=>{
 
-    dbConn.query('INSERT INTO story SET Where email=? AND name=? ',[employeeReqData.email,employeeReqData.name],(err,res)=>{
+    dbConn.query('INSERT INTO story (email,name) VALUES (?,?)',[employeeReqData.email,employeeReqData.name],(err,res)=>{
         if(err){
             console.log('Error while inserting data');
             result(null, err);

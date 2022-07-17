@@ -35,7 +35,7 @@ export default {
   methods: {
   submitForm() {
       let formData = new FormData();
-      formData.append("myfile", this.story);
+       formData.append("myfile", this.story);
       formData.append("email",localStorage.getItem("email"));
       formData.append("name",this.name);
   axios
@@ -47,6 +47,7 @@ export default {
         .then(function (data) {
           console.log(data);
           console.log("Hello world");
+          this.$router.push("/Status")
         })
         .catch(function () {
           console.log("FAILURE!!");

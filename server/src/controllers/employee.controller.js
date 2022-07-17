@@ -115,6 +115,7 @@ exports.createnewstatus = (req, res) =>{
 
 exports.createnewstory = (req, res) =>{
     const UserReqData = new StoryModel(req.body);
+   
     console.log('employeeReqData', UserReqData);
     // check null
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){
