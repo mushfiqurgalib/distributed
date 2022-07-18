@@ -3,6 +3,8 @@ const UserModel = require('../models/employee.model');
 const StatusModel=require('../models/status.model');
 const StoryModel=require('../models/story.model');
 const jwt=require('jsonwebtoken');
+const multer=require('multer');
+const { diskStorage } = require('multer');
 
 
 // get all employee list
@@ -95,25 +97,28 @@ exports.getAllStatus = (req, res)=> {
         res.send(status)
     })
 }
+const fileengine=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'./uploads')
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+"--"+file.originalname);
+    },
+    
+ });
+const upload=multer({storage:fileengine});
 
 //create new status
-exports.createnewstatus = (req, res) =>{
-    const UserReqData = new StatusModel(req.body);
-    console.log('employeeReqData', UserReqData);
-    // check null
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.send(400).send({success: false, message: 'Please fill all fields'});
-    }else{
-        StatusModel.createStatus(UserReqData, (err, user)=>{
-            if(err){
-            res.send(err);}
-            else{
-            res.json({status: true, message: 'Status Created Successfully',data:user})}
-        })
-    }
-}
+    exports.createnewstory=upload.single("image"),(req,res)=>{
+        console.log(req.file);
+        res.send("Success");
+ }
+ 
 
-exports.createnewstory = (req, res) =>{
+ 
+
+
+exports.createnewstatus = (req, res) =>{
     const UserReqData = new StoryModel(req.body);
    
     console.log('employeeReqData', UserReqData);
@@ -153,3 +158,7 @@ exports.deleteEmployee = (req, res)=>{
         res.json({success:true, message: 'Employee deleted successully!'});
     })
 }
+
+// module.exports={
+//     fileengine
+// }
