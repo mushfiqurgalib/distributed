@@ -3,10 +3,18 @@ const UserModel = require('../models/employee.model');
 const StatusModel=require('../models/status.model');
 const StoryModel=require('../models/story.model');
 const jwt=require('jsonwebtoken');
-const multer=require('multer');
+const minio=require('minio');
+const crypto=require('crypto');
 const { diskStorage } = require('multer');
+var dbConn  = require('../../config/db.config');
 
-
+var minioClient = new minio.Client({
+    endPoint: '127.0.0.1',
+    port: 9000  ,
+    useSSL: false,
+    accessKey: 'z2DIVKvrGW7JLwyZ',
+    secretKey: 'nD4nXPf5oNTJl4FlBdLlz1jYlrC2diUY'
+});
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
     //console.log('here all employees list');
@@ -97,19 +105,32 @@ exports.getAllStatus = (req, res)=> {
         res.send(status)
     })
 }
-const fileengine=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'./uploads')
-    },
-    filename:(req,file,cb)=>{
-        cb(null,Date.now()+"--"+file.originalname);
-    },
-    
- });
-const upload=multer({storage:fileengine});
 
 //create new status
-    exports.createnewstory=upload.single("image"),(req,res)=>{
+    exports.createnewstory=(req,res)=>{
+        // console.log(req.file);
+        // console.log(req.body);
+        var uuid=crypto.randomUUID();
+       
+        // story.email=req.body.email;
+        // story.name=uuid;
+        dbConn.query('INSERT INTO story (email,name) VALUES (?,?)',[req.body.email,uuid],(err,res)=>{
+            if(err){
+                console.log('Error while inserting data');
+                // result(null, err);
+            }else{
+                console.log('Story created successfully');
+                // result(null, res)
+            }
+        })
+        
+        
+        minioClient.fPutObject('class', uuid, req.file.path, function(err, objInfo) {
+            if(err) {
+                res.send(err);
+            }
+            console.log("Success", objInfo.etag, objInfo.versionId)
+        })
         console.log(req.file);
         res.send("Success");
  }
