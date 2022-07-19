@@ -1,62 +1,84 @@
 <template>
   <div>
-   
+
 
     <h1>Status list</h1>
     <br />
-    <br /><div style="display:inline-block;padding:5px">
-    <button class="btn1" >
-      <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
-        Add Status
-      </router-link>
-    </button>
-       <button class="btn1" >
-      <router-link to="/Addstory" class="nav-link fa-1x" id="button">
-       Add picture
-      </router-link>
-    </button>
-    <button @click="()=>{logout();}">Logout</button>
-</div>
+    <br />
+    <div style="display:inline-block;padding:5px">
+      <button class="btn1">
+        <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
+          Add Status
+        </router-link>
+      </button>
+      <button class="btn1">
+        <router-link to="/Addstory" class="nav-link fa-1x" id="button">
+          Add picture
+        </router-link>
+      </button>
+      <button @click="() => { logout(); }">Logout</button>
+    </div>
     <!-- <Profile v-bind:info="info"> </Profile> -->
-
-    <div class="container">
+    <div class="container1">
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-        <div class="col" v-for="inf in info" :key="inf.id">
+        <div class="col" v-for="infe in info1" :key="infe.id">
           <div class="card radius-15">
             <div class="card-body text-center">
               <div class="p-4 border radius-15">
-               
 
-                <h5 class="mb-0 mt-5">Email: {{ inf.email }}</h5>
-                <p class="mb-3">Status: {{ inf.status }}</p>
+
+                <h5 class="mb-0 mt-5">Email: {{ infe.email }}</h5>
+                <p class="mb-3">Story: {{ infe.name }}</p>
                 <div class="list-inline contacts-social mt-3 mb-3">
-                  <a
-                    href="javascript:;"
-                    class="list-inline-item bg-facebook text-white border-0"
-                    ><i class="bx bxl-facebook"></i
-                  ></a>
-                  <a
-                    href="javascript:;"
-                    class="list-inline-item bg-twitter text-white border-0"
-                    ><i class="bx bxl-twitter"></i
-                  ></a>
-                  <a
-                    href="javascript:;"
-                    class="list-inline-item bg-linkedin text-white border-0"
-                    ><i class="bx bxl-linkedin"></i
-                  ></a>
+                  <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i
+                      class="bx bxl-facebook"></i></a>
+                  <a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i
+                      class="bx bxl-twitter"></i></a>
+                  <a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i
+                      class="bx bxl-linkedin"></i></a>
                 </div>
-               
 
-                
 
-                
+
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+        <div class="col" v-for="inf in info" :key="inf.id">
+          <div class="card radius-15">
+            <div class="card-body text-center">
+              <div class="p-4 border radius-15">
+
+
+                <h5 class="mb-0 mt-5">Email: {{ inf.email }}</h5>
+                <p class="mb-3">Status: {{ inf.status }}</p>
+                <div class="list-inline contacts-social mt-3 mb-3">
+                  <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i
+                      class="bx bxl-facebook"></i></a>
+                  <a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i
+                      class="bx bxl-twitter"></i></a>
+                  <a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i
+                      class="bx bxl-linkedin"></i></a>
+                </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -67,32 +89,46 @@ import axios from "axios";
 
 export default {
   name: "StatusList",
-  
+
 
   data() {
     return {
       info: "",
-      email:""
+      email: "",
+      info1: ""
     };
   },
   mounted() {
+    this.fetchInfo1();
     this.fetchInfo();
   },
 
   methods: {
     fetchInfo() {
       // console.log(localStorage.getItem("email"));
-      axios.get("api/v1/employee/profile/"+localStorage.getItem("Jwt")).then((res)=>{this.email=res.data.name;
-      console.log(res);
-      axios.get("/api/v1/employee/viewstatus/"+this.email).then((res) => (this.info = res.data));});
+      axios.get("api/v1/employee/profile/" + localStorage.getItem("Jwt")).then((res) => {
+        this.email = res.data.name;
+        console.log(res);
+        axios.get("/api/v1/employee/viewstatus/" + this.email).then((res) => (this.info = res.data));
+    
+      });
+
+
+    },
+
+    fetchInfo1(){
+    
+        this.email = localStorage.getItem("email");
+      
+        axios.get("/api/v1/employee/viewstory/" + this.email).then((res) => (this.info1 = res.data));
       
 
     },
-    logout(){
+    logout() {
       localStorage.clear();
       this.$router.push("/");
     }
-    
+
   },
 };
 </script>
@@ -102,9 +138,11 @@ body {
   background-color: #f7f7ff;
   margin-top: 20px;
 }
+
 .radius-15 {
   border-radius: 15px;
 }
+
 .card {
   position: relative;
   display: flex;
@@ -124,6 +162,7 @@ body {
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
 }
+
 .contacts-social a {
   font-size: 16px;
   width: 36px;
@@ -135,12 +174,15 @@ body {
   border-radius: 50%;
   color: #2b2a2a;
 }
+
 .bg-facebook {
   background-color: #3b5998 !important;
 }
+
 .bg-twitter {
   background-color: #55acee !important;
 }
+
 .bg-linkedin {
   background-color: #0976b4 !important;
 }
@@ -148,18 +190,22 @@ body {
 .container {
   padding-top: 50px;
 }
+
 #button {
   padding-left: 10px;
   font: bold;
 }
-.buttondis{
+
+.buttondis {
   width: 100%;
-  text-align:center;
+  text-align: center;
 }
-.inner{
+
+.inner {
   display: inline-block;
 }
-.btn1{
+
+.btn1 {
   margin-right: 20px;
 }
 </style>
