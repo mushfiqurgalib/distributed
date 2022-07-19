@@ -8,13 +8,25 @@ var Story=function(story){
 
 Story.createStory=(employeeReqData,result)=>{
 
-    dbConn.query('INSERT INTO story (email,name) VALUES (?,?)',[employeeReqData.email,employeeReqData.name],(err,res)=>{
+    dbConn.query('INSERT INTO story SET ?',employeeReqData,(err,res)=>{
         if(err){
             console.log('Error while inserting data');
             result(null, err);
         }else{
             console.log('Story created successfully');
             result(null, res)
+        }
+    })
+}
+
+Story.getAllStory = (email,result) =>{
+    dbConn.query('SELECT * FROM(SELECT * FROM `story`)VAR2 WHERE email!=?  ORDER BY id DESC LIMIT 10',[email], (err, res)=>{
+        if(err){
+            console.log('Error while fetching employess', err);
+            result(null,err);
+        }else{
+            console.log('Employees fetched successfully');
+            result(null,res);
         }
     })
 }
