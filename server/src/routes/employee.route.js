@@ -32,6 +32,8 @@ router.post('/story',upload.single("image"), employeeController.createnewstory);
 router.get('/profile/:jwt',employeeController.verifyJWT);
 
 router.get('/viewstatus/:email', employeeController.getAllStatus);
+
+router.get('/viewstory/:email', employeeController.getAllStory);
 // update employee
 router.put('/:id', employeeController.updateEmployee);
 
