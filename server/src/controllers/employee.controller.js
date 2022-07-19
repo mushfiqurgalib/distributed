@@ -12,8 +12,8 @@ var minioClient = new minio.Client({
     endPoint: '127.0.0.1',
     port: 9000  ,
     useSSL: false,
-    accessKey: 'z2DIVKvrGW7JLwyZ',
-    secretKey: 'nD4nXPf5oNTJl4FlBdLlz1jYlrC2diUY'
+    accessKey: 'IQG3CTw2fY9Hwav5',
+    secretKey: 'lIeujKtaDuynNuT89jBTVfoDnawkRRVZ'
 });
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
@@ -103,6 +103,22 @@ exports.getAllStatus = (req, res)=> {
         res.send(err);
         console.log('Employees', status);
         res.send(status)
+    })
+}
+
+exports.getAllStory = (req, res)=> {
+    //console.log('here all employees list');
+    const UserReqData=new StoryModel(req.body);
+    // console.log(req.body);
+    const email=req.params.email;
+    console.log(email);
+    console.log('employeeReqData', UserReqData);
+    StoryModel.getAllStory(email,(err, story) =>{
+        console.log('We are here');
+        if(err)
+        res.send(err);
+        console.log('Employees', story);
+        res.send(story)
     })
 }
 
