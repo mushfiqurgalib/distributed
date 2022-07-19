@@ -28,30 +28,28 @@ export default {
     return {
       email: "",
       story: "",
-      name:uuid.v4()
+     
     };
   },
 
   methods: {
   submitForm() {
       let formData = new FormData();
-       formData.append("myfile", this.story);
-      formData.append("email",localStorage.getItem("email"));
-      formData.append("name",this.name);
+        formData.append("image", this.story);
+       formData.append("email",localStorage.getItem("email"));
+  
   axios
         .post("/api/v1/employee/story", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // },
         })
-        .then(function (data) {
-          console.log(data);
-          console.log("Hello world");
-          this.$router.push("/Status")
-        })
-        .catch(function () {
-          console.log("FAILURE!!");
-        });
+       
+          this.$router.push("/status");
+        
+        // .catch(function () {
+        //   console.log("FAILURE!!");
+        // });
       // if (response.data[0].status == 1) {
       //   alert("File upload successfully!");
       //   this.$router.push("/home3");
