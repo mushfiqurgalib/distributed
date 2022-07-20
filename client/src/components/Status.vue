@@ -20,7 +20,7 @@
     </div>
     <!-- <Profile v-bind:info="info"> </Profile> -->
     <div class="container1">
-      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4" style="display:inline-flex">
         <div class="col" v-for="infe in info1" :key="infe.id">
           <div class="card radius-15">
             <div class="card-body text-center">
@@ -28,7 +28,7 @@
 
 
                 <h5 class="mb-0 mt-5">Email: {{ infe.email }}</h5>
-                <p class="mb-3">Story: {{ infe.name }}</p>
+                <img :src= "'http://127.0.0.1:9000/class/'+ infe.name ">
                 <div class="list-inline contacts-social mt-3 mb-3">
                   <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i
                       class="bx bxl-facebook"></i></a>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4" >
         <div class="col" v-for="inf in info" :key="inf.id">
           <div class="card radius-15">
             <div class="card-body text-center">
