@@ -1,11 +1,9 @@
 <template>
-  <div>
+  <div style="background-color: #4267B2">
 
 
-    <h1>Status list</h1>
-    <br />
-    <br />
-    <div style="display:inline-block;padding:5px">
+    
+    <div style="display:inline-block;padding:5px;">
       <button class="btn1">
         <router-link to="/AddStatus" class="nav-link fa-1x" id="button">
           Add Status
@@ -19,35 +17,35 @@
       <button @click="() => { logout(); }">Logout</button>
     </div>
     <!-- <Profile v-bind:info="info"> </Profile> -->
-    <div class="container1">
-      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4" style="display:inline-flex">
-        <div class="col" v-for="infe in info1" :key="infe.id">
+
+    <h1>Story list</h1>
+    <br />
+    <br />
+    <div style="height:100%;width:100%">
+    <div class="container">
+     <div class="c">
+      <div class="row row-cols-1 row-cols-lg-1 row-cols-xl-3 ms-1" style="display:inline-flex; flex: wrap;  width: 100%;">
+        <div class="col-lg-1" style="margin-right: 5%; overflow-x: hidden;"  v-for="infe in info1" :key="infe.id">
+       
           <div class="card radius-15">
             <div class="card-body text-center">
-              <div class="p-4 border radius-15">
+              <div class=" border radius-15">
 
-
-                <h5 class="mb-0 mt-5">Email: {{ infe.email }}</h5>
+          
+                <h5 class="mb-0 mt-5"> {{ infe.email }}</h5>
+                
                 <img :src= "'http://127.0.0.1:9000/class/'+ infe.name ">
-                <div class="list-inline contacts-social mt-3 mb-3">
-                  <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i
-                      class="bx bxl-facebook"></i></a>
-                  <a href="javascript:;" class="list-inline-item bg-twitter text-white border-0"><i
-                      class="bx bxl-twitter"></i></a>
-                  <a href="javascript:;" class="list-inline-item bg-linkedin text-white border-0"><i
-                      class="bx bxl-linkedin"></i></a>
                 </div>
-
-
-
-
-
+                
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
+    <h1>Status list</h1>
+    <br />
+    <br />
     <div class="container">
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4" >
         <div class="col" v-for="inf in info" :key="inf.id">
@@ -141,8 +139,17 @@ body {
 
 .radius-15 {
   border-radius: 15px;
+  /* width: 100px;
+  height: 200px; */
 }
-
+.radius-10 {
+  border-radius: 15px;
+  width: 40px;
+  height: 40px;
+}
+.c{
+  margin-right: 10px ;
+}
 .card {
   position: relative;
   display: flex;
@@ -158,7 +165,10 @@ body {
     0 2px 6px 0 rgba(19, 81, 114, 0.54);
 }
 
-
+.styler{
+  height: 100px;
+  width: 100px;
+}
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
 }
@@ -189,6 +199,8 @@ body {
 
 .container {
   padding-top: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 #button {
