@@ -12,8 +12,8 @@ var minioClient = new minio.Client({
     endPoint: '127.0.0.1',
     port: 9000  ,
     useSSL: false,
-    accessKey: 'IQG3CTw2fY9Hwav5',
-    secretKey: 'lIeujKtaDuynNuT89jBTVfoDnawkRRVZ'
+    accessKey: 'z2DIVKvrGW7JLwyZ',
+    secretKey: 'nD4nXPf5oNTJl4FlBdLlz1jYlrC2diUY'
 });
 // get all employee list
 exports.getEmployeeList = (req, res)=> {
@@ -155,22 +155,6 @@ exports.getAllStory = (req, res)=> {
  
 
 
-exports.createnewstatus = (req, res) =>{
-    const UserReqData = new StoryModel(req.body);
-   
-    console.log('employeeReqData', UserReqData);
-    // check null
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-        res.send(400).send({success: false, message: 'Please fill all fields'});
-    }else{
-       StoryModel.createStory(UserReqData, (err, user)=>{
-            if(err){
-            res.send(err);}
-            else{
-            res.json({status: true, message: 'Story Created Successfully',data:user})}
-        })
-    }
-}
 // update employee
 exports.updateEmployee = (req, res)=>{
     const employeeReqData = new EmployeeModel(req.body);
@@ -186,7 +170,22 @@ exports.updateEmployee = (req, res)=>{
         })
     }
 }
-
+exports.createnewstatus = (req, res) =>{
+    const UserReqData = new StatusModel(req.body);
+   
+    console.log('employeeReqData', UserReqData);
+    // check null
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.send(400).send({success: false, message: 'Please fill all fields'});
+    }else{
+        StatusModel.createStatus(UserReqData, (err, user)=>{
+            if(err){
+            res.send(err);}
+            else{
+            res.json({status: true, message: 'Story Created Successfully',data:user})}
+        })
+    }
+}
 // delete employee
 exports.deleteEmployee = (req, res)=>{
     EmployeeModel.deleteEmployee(req.params.id, (err, employee)=>{
