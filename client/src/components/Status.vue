@@ -107,7 +107,7 @@ export default {
       axios.get("api/v1/employee/profile/" + localStorage.getItem("Jwt")).then((res) => {
         this.email = res.data.name;
         console.log(res);
-        axios.get("/api/v1/employee/viewstatus/" + this.email).then((res) => (this.info = res.data));
+        axios.get("/api/v1/employee/status/" + this.email).then((res) => (this.info = res.data));
     
       });
 
@@ -118,7 +118,7 @@ export default {
     
         this.email = localStorage.getItem("email");
       
-        axios.get("/api/v1/employee/viewstory/" + this.email).then((res) => (this.info1 = res.data));
+        axios.get("/api/v1/employee/story/" + this.email).then((res) => (this.info1 = res.data));
       
 
     },
